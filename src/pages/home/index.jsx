@@ -14,6 +14,5 @@ export const Home = () => {
 };
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors.backgroundColor};
-  color: ${({ theme }) => theme.colors.textColor};
+
 `;
