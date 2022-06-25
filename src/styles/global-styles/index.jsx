@@ -63,7 +63,7 @@ html {
 body {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 3%;
 	font-family: 'Nunito Sans', sans-serif;
+	padding: 0 5%;
 }
 `;
