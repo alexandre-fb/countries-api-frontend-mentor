@@ -57,12 +57,13 @@ table {
 
 html {
     background-color: ${({ theme }) => theme.colors.backgroundColor};
-    color: ${({ theme }) => theme.colors.primary}
+    color: ${({ theme }) => theme.colors.primary};
 }
 
 body {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 50px;
+    padding: 0 3%;
+	font-family: 'Nunito Sans', sans-serif;
 }
 `;
