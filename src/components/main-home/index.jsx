@@ -1,19 +1,8 @@
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { MdExpandMore } from "react-icons/md";
-import { regionsName } from "./regions-name";
-import {
-  getCountriesByRegion,
-  getCountryByName,
-  getAllCountries,
-} from "../../services";
+
+import { getCountriesByRegion, getCountryByName } from "../../services";
 import {
   Container,
-  SearchArea,
-  SearchByNameContainer,
-  SelectByRegionContainer,
-  Selector,
-  Regions,
   Countries,
   Country,
   Flag,
@@ -23,47 +12,27 @@ import {
 } from "./styles";
 import { Loader } from "../loader";
 import { NotFoundMessage } from "../not-found-message.jsx";
-// import { Loader } from "../loader";
+import { SearchArea } from "../search-area";
+import { MdOutlineNoStroller } from "react-icons/md";
 
 export const MainHome = () => {
   const [selectRegionIsClicked, setSelectRegionIsClicked] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("america");
-
   const [countryNameTyped, setCountryNameTyped] = useState("");
-  // const [allCountries, setAllCountries] = useState();
   const [countriesByRegion, setCountriesByRegion] = useState();
   const [countryByName, setCountryByName] = useState();
-  const [dataToShow, setDataToShow] = useState();
+  const [countriesToShow, setCountriesToShow] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("countryNameTyped", countryNameTyped);
-
-  console.log("selectedRegion", selectedRegion);
-
-  console.log("dataToShow", dataToShow);
-
+  //=====set countries to show=====
   useEffect(() => {
-    setDataToShow(countriesByRegion);
-    countryByName && !countryByName.message && setDataToShow(countryByName);
+    countryNameTyped !== "" && countryByName && !countryByName.message
+      ? setCountriesToShow(countryByName)
+      : countriesByRegion && setCountriesToShow(countriesByRegion);
     setIsLoading(false);
-  }, [countryByName, countriesByRegion]);
+  }, [countryByName, countryNameTyped, countriesByRegion]);
 
-  //=====start set all countries=====
-
-  // useEffect(() => {
-  //   async function fetchAllCountries() {
-  //     const apiData = await getAllCountries();
-  //     setAllCountries(apiData);
-  //   }
-
-  //   fetchAllCountries();
-  // }, []);
-
-  // console.log("allCountries", allCountries);
-  //=====end set all countries=====
-
-  //=====start set countries by region=====
-
+  //=====set countries by region=====
   useEffect(() => {
     async function fetchCountriesByRegion() {
       const apiData = await getCountriesByRegion(selectedRegion);
@@ -73,76 +42,27 @@ export const MainHome = () => {
     fetchCountriesByRegion();
   }, [selectedRegion]);
 
-  console.log("countriesByRegion", countriesByRegion);
-  //=====end set countries by region=====
-
-  //=====start set countries by name=====
-
+  //=====set countries by name=====
   useEffect(() => {
     async function fetchCountryByName() {
       const apiData = await getCountryByName(countryNameTyped);
       setCountryByName(apiData);
     }
 
-    fetchCountryByName();
+    countryNameTyped !== "" && fetchCountryByName();
   }, [countryNameTyped]);
-
-  console.log("countryByName", countryByName);
-  //=====end set countries by region=====
-
-  // useEffect(() => {
-  //   function setarData() {
-  //     if (countryByName !== "Page Not Found") {
-  //       countryByName && setDataToShow(countryByName);
-  //     } else {
-  //       allCountries && setDataToShow(allCountries);
-  //     }
-  //   }
-  //   setarData();
-  // }, [countryNameTyped]);
 
   return (
     <Container>
-      <SearchArea>
-        <SearchByNameContainer>
-          <label htmlFor="search-by-name">
-            <FaSearch />
-          </label>
-          <input
-            type="text"
-            id="search-by-name"
-            placeholder="Search for a country..."
-            value={countryNameTyped}
-            onChange={(event) => {
-              setCountryNameTyped(event.target.value), setIsLoading(true);
-            }}
-          ></input>
-        </SearchByNameContainer>
-
-        <SelectByRegionContainer>
-          <Selector
-            onClick={() => setSelectRegionIsClicked(!selectRegionIsClicked)}
-          >
-            <span>Filter by Region</span>
-            <MdExpandMore />
-          </Selector>
-
-          <Regions isClicked={selectRegionIsClicked}>
-            {regionsName.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => (
-                  setSelectedRegion(item),
-                  setSelectRegionIsClicked(!selectRegionIsClicked),
-                  setIsLoading(true)
-                )}
-              >
-                {item}
-              </li>
-            ))}
-          </Regions>
-        </SelectByRegionContainer>
-      </SearchArea>
+      <SearchArea
+        setCountryNameTyped={setCountryNameTyped}
+        setIsLoading={setIsLoading}
+        setSelectRegionIsClicked={setSelectRegionIsClicked}
+        selectRegionIsClicked={selectRegionIsClicked}
+        countryNameTyped={countryNameTyped}
+        setSelectedRegion={setSelectedRegion}
+        setCountryByName={setCountryByName}
+      />
 
       {isLoading === true ? (
         <Loader />
@@ -151,8 +71,8 @@ export const MainHome = () => {
         <NotFoundMessage />
       ) : (
         <Countries>
-          {dataToShow &&
-            dataToShow.map((item, index) => {
+          {countriesToShow &&
+            countriesToShow.map((item, index) => {
               return (
                 <Country key={index}>
                   <Flag img={item.flags.png}></Flag>
