@@ -11,10 +11,12 @@ import { regionsName } from "./regions-name";
 
 export const SearchArea = ({
   setCountryNameTyped,
+  countryNameTyped,
   setIsLoading,
   setSelectRegionIsClicked,
   selectRegionIsClicked,
   setSelectedRegion,
+  c,
 }) => {
   return (
     <Container>
@@ -26,6 +28,7 @@ export const SearchArea = ({
           type="text"
           id="search-by-name"
           placeholder="Search for a country..."
+          value={countryNameTyped}
           onChange={(event) => {
             setCountryNameTyped(event.target.value);
           }}
