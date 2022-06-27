@@ -13,7 +13,6 @@ import {
 import { Loader } from "../loader";
 import { NotFoundMessage } from "../not-found-message.jsx";
 import { SearchArea } from "../search-area";
-import { MdOutlineNoStroller } from "react-icons/md";
 
 export const MainHome = () => {
   const [selectRegionIsClicked, setSelectRegionIsClicked] = useState(false);
