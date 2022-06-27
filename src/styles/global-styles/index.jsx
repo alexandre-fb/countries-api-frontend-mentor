@@ -58,6 +58,7 @@ table {
 html {
     background-color: ${({ theme }) => theme.colors.backgroundColor};
     color: ${({ theme }) => theme.colors.primary};
+
 }
 
 body {
