@@ -2,7 +2,6 @@ import Lottie from "lottie-react";
 import { Container } from "./styles";
 import globe from "../../assets/lottie-animations/earth-globe.json";
 
-
 export const Loader = () => {
   return (
     <Container>
