@@ -1,6 +1,7 @@
 import Lottie from "lottie-react";
-import styled from "styled-components";
+import { Container } from "./styles";
 import globe from "../../assets/lottie-animations/earth-globe.json";
+
 
 export const Loader = () => {
   return (
@@ -12,17 +13,3 @@ export const Loader = () => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 150px 0;
-
-  div {
-    width: 100px;
-    height: 100px;
-  }
-`;
