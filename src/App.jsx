@@ -1,5 +1,5 @@
 import { ThemeContextProvider } from "./contexts/themeContext";
-import { Home } from "./pages/home";
+import { AppRoutes } from "./pages/routes";
 import { GlobalStyle } from "./styles/global-styles";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
       <ThemeContextProvider>
         <GlobalStyle />
-        <Home />
+        <AppRoutes />
       </ThemeContextProvider>
     </>
   );

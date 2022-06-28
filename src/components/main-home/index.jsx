@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { getCountriesByRegion, getCountryByName } from "../../services";
 import {
   Container,
@@ -13,6 +12,7 @@ import {
 import { Loader } from "../loader";
 import { NotFoundMessage } from "../not-found-message.jsx";
 import { SearchArea } from "../search-area";
+import { Link } from "react-router-dom";
 
 export const MainHome = () => {
   const [selectRegionIsClicked, setSelectRegionIsClicked] = useState(false);
@@ -76,17 +76,19 @@ export const MainHome = () => {
           {countriesToShow &&
             countriesToShow.map((item, index) => {
               return (
-                <Country key={index}>
-                  <Flag img={item.flags.png}></Flag>
-                  <ContainerData>
-                    <Name>{item.name.common}</Name>
-                    <Data>
-                      <li>Population: {item.population}</li>
-                      <li>Region: {item.region}</li>
-                      <li>Capital: {item.capital}</li>
-                    </Data>
-                  </ContainerData>
-                </Country>
+                <Link to={`/detail/${item.cca3}`}>
+                  <Country key={index}>
+                    <Flag img={item.flags.png}></Flag>
+                    <ContainerData>
+                      <Name>{item.name.common}</Name>
+                      <Data>
+                        <li>Population: {item.population}</li>
+                        <li>Region: {item.region}</li>
+                        <li>Capital: {item.capital}</li>
+                      </Data>
+                    </ContainerData>
+                  </Country>
+                </Link>
               );
             })}
         </Countries>
