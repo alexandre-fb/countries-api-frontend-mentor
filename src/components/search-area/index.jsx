@@ -16,7 +16,6 @@ export const SearchArea = ({
   setSelectRegionIsClicked,
   selectRegionIsClicked,
   setSelectedRegion,
-  c,
 }) => {
   return (
     <Container>
@@ -31,6 +30,7 @@ export const SearchArea = ({
           value={countryNameTyped}
           onChange={(event) => {
             setCountryNameTyped(event.target.value);
+            // setCountriesByRegion('');
           }}
         ></input>
       </SearchByNameContainer>

@@ -28,9 +28,12 @@ export const MainHome = () => {
     countryNameTyped !== "" && countryByName && !countryByName.message
       ? setCountriesToShow(countryByName)
       : countriesByRegion && setCountriesToShow(countriesByRegion);
+
     setIsLoading(false);
   }, [countryByName, countryNameTyped, countriesByRegion]);
-
+  console.log("countriesToShow", countriesToShow);
+  console.log("selectedRegion", selectedRegion);
+  console.log("countriesByRegion", countriesByRegion);
   //=====set countries by region=====
   useEffect(() => {
     async function fetchCountriesByRegion() {
