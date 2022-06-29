@@ -1,28 +1,33 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import { getCountryByCode } from "../../services";
-import { PrimaryButton } from "../primary-button";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Loader } from "../loader";
-import { BoxWithShadow } from "../box-with-shadow";
+import {
+  StyledMain,
+  BackButton,
+  FlagAndDataContainer,
+  Flag,
+  DataContainer,
+  NameCountry,
+  FirstColumn,
+  SecondColumn,
+  BorderCountriesContainer,
+  Countries,
+  Country,
+  DetailsContainer,
+} from "./styles";
 
 export const MainCountryDetail = () => {
   const [dataCountry, setDataCountry] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const { code } = useParams();
-
-  console.log(dataCountry && dataCountry);
-  // const nameoficial = dataCountry && dataCountry.name.nativeName;
-  // const nameOficialCoisado = dataCountry && Object.values(nameoficial);
-  // console.log("nameoficial", nameoficial);
-  // console.log("nameOficialCoisado", nameOficialCoisado);
+  const { countryCode } = useParams();
 
   //=====set data country=====
   useEffect(() => {
     const fetchDataCountry = async () => {
-      const apiData = await getCountryByCode(code);
+      const apiData = await getCountryByCode(countryCode);
       setDataCountry({
         flag: apiData[0].flags.svg,
         name: apiData[0].name.common,
@@ -39,10 +44,10 @@ export const MainCountryDetail = () => {
     };
     fetchDataCountry();
     setIsLoading(false);
-  }, [code]);
+  }, [countryCode]);
 
   return (
-    <Container>
+    <StyledMain>
       <Link to="/">
         <BackButton>
           <HiArrowNarrowLeft />
@@ -56,52 +61,62 @@ export const MainCountryDetail = () => {
         dataCountry && (
           <FlagAndDataContainer>
             <Flag src={dataCountry.flag} />
+
             <DataContainer>
               <NameCountry>{dataCountry.name}</NameCountry>
 
-              <Details>
-                <li>
-                  <span>Native Name: </span>
-                  {Object.values(dataCountry.nativeName)[0].common}
-                </li>
-                <li>
-                  <span>Population: </span>
-                  {dataCountry.population}
-                </li>
-                <li>
-                  <span>Region: </span>
-                  {dataCountry.region}
-                </li>
-                <li>
-                  <span>Sub Region: </span> {dataCountry.subRegion}
-                </li>
-                <li>
-                  <span>Capital: </span>
-                  {dataCountry.capital}
-                </li>
-                <li>
-                  <span>Top Level Domain: </span>
-                  {dataCountry.tld.map((item) => `'${item}'`).join(", ")}
-                </li>
-                <li>
-                  <span>Currencies: </span>
-                  {Object.values(dataCountry.currencies)[0].name}
-                </li>
-                <li>
-                  <span>Languages:</span>{" "}
-                  {Object.values(dataCountry.languages)
-                    .map((item) => item)
-                    .join(", ")}
-                </li>
-              </Details>
+              <DetailsContainer>
+                <FirstColumn>
+                  <li>
+                    <h4>Native Name: </h4>
+                    <span>
+                      {Object.values(dataCountry.nativeName)[0].common}
+                    </span>
+                  </li>
+                  <li>
+                    <h4>Population: </h4>
+                    <span>{dataCountry.population}</span>
+                  </li>
+                  <li>
+                    <h4>Region: </h4>
+                    <span>{dataCountry.region}</span>
+                  </li>
+                  <li>
+                    <h4>Sub Region: </h4>
+                    <span>{dataCountry.subRegion}</span>
+                  </li>
+                  <li>
+                    <h4>Capital: </h4>
+                    <span>{dataCountry.capital}</span>
+                  </li>
+                </FirstColumn>
+                <SecondColumn>
+                  <li>
+                    <h4>Top Level Domain: </h4>
+                    <span>{dataCountry.tld.map((tld) => tld).join(", ")}</span>
+                  </li>
+                  <li>
+                    <h4>Currencies: </h4>
+                    <span>{Object.values(dataCountry.currencies)[0].name}</span>
+                  </li>
+                  <li>
+                    <h4>Languages:</h4>
+                    <span>
+                      {Object.values(dataCountry.languages)
+                        .map((language) => language)
+                        .join(", ")}
+                    </span>
+                  </li>
+                </SecondColumn>
+              </DetailsContainer>
 
               <BorderCountriesContainer>
-                <span>Border Countries:</span>
+                <h4>Border Countries:</h4>
                 <Countries>
                   {dataCountry.borders ? (
-                    dataCountry.borders.map((item, index) => (
-                      <Link to={`/detail/${item}`}>
-                        <Country index={index}>{item}</Country>
+                    dataCountry.borders.map((country, index) => (
+                      <Link key={index} to={`/detail/${country}`}>
+                        <Country>{country}</Country>
                       </Link>
                     ))
                   ) : (
@@ -113,79 +128,6 @@ export const MainCountryDetail = () => {
           </FlagAndDataContainer>
         )
       )}
-    </Container>
+    </StyledMain>
   );
 };
-
-export const Container = styled.main`
-  padding: 70px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-`;
-
-export const BackButton = styled(PrimaryButton)`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const FlagAndDataContainer = styled.section`
-  display: flex;
-  gap: 100px;
-  align-items: center;
-`;
-
-export const Flag = styled.img`
-  width: 45%;
-  min-width: 450px;
-`;
-
-export const DataContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  height: 100%;
-  width: 45%;
-`;
-
-export const NameCountry = styled.h2`
-  font-size: 1.7rem;
-  font-weight: 800;
-`;
-
-export const Details = styled.ul`
-  display: flex;
-  flex-flow: column wrap;
-  height: 100%;
-  gap: 10px;
-
-  width: 100%;
-  height: 120px;
-
-  span {
-    font-weight: 600;
-  }
-`;
-
-export const BorderCountriesContainer = styled.div`
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 30px;
-
-  span {
-    font-weight: 600;
-  }
-`;
-
-export const Countries = styled.ul`
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-`;
-
-export const Country = styled(BoxWithShadow).attrs({ as: "li" })`
-  padding: 10px 15px;
-`;
