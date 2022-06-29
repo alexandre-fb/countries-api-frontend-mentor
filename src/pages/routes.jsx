@@ -7,7 +7,7 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/detail/:code" element={<CountryDetail />} />
+        <Route exact path="/detail/:countryCode" element={<CountryDetail />} />
       </Routes>
     </BrowserRouter>
   );

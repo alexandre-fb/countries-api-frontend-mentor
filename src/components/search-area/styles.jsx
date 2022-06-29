@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BoxWithShadow } from "../box-with-shadow";
 
 export const Container = styled.section`
   height: 60px;
@@ -9,18 +10,14 @@ export const Container = styled.section`
   align-items: start;
 `;
 
-export const SearchByNameContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.secondary};
+export const SearchByNameContainer = styled(BoxWithShadow)`
   padding: 15px;
-  border-radius: 5px;
   width: 400px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   gap: 15px;
-
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 
   input {
     background-color: transparent;
@@ -46,13 +43,9 @@ export const SelectByRegionContainer = styled.div`
   gap: 3px;
 `;
 
-export const Selector = styled.div`
+export const Selector = styled(BoxWithShadow)`
   height: 60px;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.secondary};
-
-  border-radius: 5px;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 
   cursor: pointer;
 
@@ -68,14 +61,18 @@ export const Regions = styled.ul`
 
   border-radius: 5px;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+`;
 
-  li {
-    padding: 15px;
-    cursor: pointer;
+export const Region = styled.li`
+  padding: 15px;
+  cursor: pointer;
 
-    :hover {
-      background-color: ${({ theme }) => theme.colors.primary};
-      color: ${({ theme }) => theme.colors.secondary};
-    }
+  font-weight: ${({ selectedRegion, className }) =>
+    selectedRegion === className && "800"};
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.primary};
+
+    color: ${({ theme }) => theme.colors.secondary};
   }
 `;

@@ -4,10 +4,12 @@ import {
   SelectByRegionContainer,
   Selector,
   Regions,
+  Region,
 } from "./styles";
 import { FaSearch } from "react-icons/fa";
 import { MdExpandMore } from "react-icons/md";
 import { regionsName } from "./regions-name";
+import { useState, useEffect } from "react";
 
 export const SearchArea = ({
   setCountryNameTyped,
@@ -16,7 +18,15 @@ export const SearchArea = ({
   setSelectRegionIsClicked,
   selectRegionIsClicked,
   setSelectedRegion,
+  selectedRegion,
 }) => {
+  const handleSelectRegionClick = (region) => {
+    region !== selectedRegion &&
+      (setSelectedRegion(region), setIsLoading(true)),
+      setSelectRegionIsClicked(!selectRegionIsClicked),
+      setCountryNameTyped("");
+  };
+
   return (
     <Container>
       <SearchByNameContainer>
@@ -30,12 +40,11 @@ export const SearchArea = ({
           value={countryNameTyped}
           onChange={(event) => {
             setCountryNameTyped(event.target.value);
-            // setCountriesByRegion('');
           }}
         ></input>
       </SearchByNameContainer>
 
-      <SelectByRegionContainer>
+      <SelectByRegionContainer selectedRegion={selectedRegion}>
         <Selector
           onClick={() => setSelectRegionIsClicked(!selectRegionIsClicked)}
         >
@@ -44,18 +53,15 @@ export const SearchArea = ({
         </Selector>
 
         <Regions isClicked={selectRegionIsClicked}>
-          {regionsName.map((item, index) => (
-            <li
+          {regionsName.map((region, index) => (
+            <Region
+              selectedRegion={selectedRegion}
+              className={region}
               key={index}
-              onClick={() => (
-                setSelectedRegion(item),
-                setSelectRegionIsClicked(!selectRegionIsClicked),
-                setIsLoading(true),
-                setCountryNameTyped("")
-              )}
+              onClick={() => handleSelectRegionClick(region)}
             >
-              {item}
-            </li>
+              {region}
+            </Region>
           ))}
         </Regions>
       </SelectByRegionContainer>

@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 export const MainHome = () => {
   const [selectRegionIsClicked, setSelectRegionIsClicked] = useState(false);
-  const [selectedRegion, setSelectedRegion] = useState("america");
+  const [selectedRegion, setSelectedRegion] = useState("Africa");
   const [countryNameTyped, setCountryNameTyped] = useState("");
   const [countriesByRegion, setCountriesByRegion] = useState();
   const [countryByName, setCountryByName] = useState();
@@ -31,9 +31,7 @@ export const MainHome = () => {
 
     setIsLoading(false);
   }, [countryByName, countryNameTyped, countriesByRegion]);
-  console.log("countriesToShow", countriesToShow);
-  console.log("selectedRegion", selectedRegion);
-  console.log("countriesByRegion", countriesByRegion);
+
   //=====set countries by region=====
   useEffect(() => {
     async function fetchCountriesByRegion() {
@@ -64,35 +62,38 @@ export const MainHome = () => {
         countryNameTyped={countryNameTyped}
         setSelectedRegion={setSelectedRegion}
         setCountryByName={setCountryByName}
+        selectedRegion={selectedRegion}
       />
 
-      {isLoading === true ? (
-        <Loader />
-      ) : countryByName?.message ===
-        "Internal Server Error: ClassCastException: attempting to castjar:file:/dev.amatos.restcountries.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/dev.amatos.restcountries.jar!/javax/ws/rs/ext/RuntimeDelegate.class" ? (
-        <NotFoundMessage />
-      ) : (
-        <Countries>
-          {countriesToShow &&
-            countriesToShow.map((item, index) => {
-              return (
-                <Link to={`/detail/${item.cca3}`}>
-                  <Country key={index}>
-                    <Flag img={item.flags.png}></Flag>
-                    <ContainerData>
-                      <Name>{item.name.common}</Name>
-                      <Data>
-                        <li>Population: {item.population}</li>
-                        <li>Region: {item.region}</li>
-                        <li>Capital: {item.capital}</li>
-                      </Data>
-                    </ContainerData>
-                  </Country>
-                </Link>
-              );
-            })}
-        </Countries>
-      )}
+      <section>
+        {isLoading === true ? (
+          <Loader />
+        ) : countryByName?.message ===
+          "Internal Server Error: ClassCastException: attempting to castjar:file:/dev.amatos.restcountries.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/dev.amatos.restcountries.jar!/javax/ws/rs/ext/RuntimeDelegate.class" ? (
+          <NotFoundMessage />
+        ) : (
+          <Countries>
+            {countriesToShow &&
+              countriesToShow.map((item, index) => {
+                return (
+                  <Link key={index} to={`/detail/${item.cca3}`}>
+                    <Country>
+                      <Flag img={item.flags.png}></Flag>
+                      <ContainerData>
+                        <Name>{item.name.common}</Name>
+                        <Data>
+                          <li>Population: {item.population}</li>
+                          <li>Region: {item.region}</li>
+                          <li>Capital: {item.capital}</li>
+                        </Data>
+                      </ContainerData>
+                    </Country>
+                  </Link>
+                );
+              })}
+          </Countries>
+        )}
+      </section>
     </Container>
   );
 };

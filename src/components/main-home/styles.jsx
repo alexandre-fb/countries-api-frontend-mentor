@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.main`
-`;
+export const Container = styled.main``;
 
 export const Countries = styled.ul`
   display: grid;
