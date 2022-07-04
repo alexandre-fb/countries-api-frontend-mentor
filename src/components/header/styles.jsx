@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BoxWithShadow } from "../box-with-shadow";
+import { screenSizes } from "../../styles/screenSizes";
 
 export const HeaderStyled = styled.header`
   height: 70px;
@@ -27,6 +28,10 @@ export const Container = styled.div`
   h2 {
     font-weight: 800;
     font-size: 1.2rem;
+
+    @media (max-width: ${screenSizes.mobile}) {
+      font-size: 1rem;
+    }
   }
 
   button {
@@ -44,5 +49,9 @@ export const Container = styled.div`
     span {
       color: ${({ theme }) => theme.colors.primary};
     }
+  }
+
+  @media (max-width: ${screenSizes.mobile}) {
+    gap: 20px;
   }
 `;
