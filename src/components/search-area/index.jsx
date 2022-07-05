@@ -9,7 +9,6 @@ import {
 import { FaSearch } from "react-icons/fa";
 import { MdExpandMore } from "react-icons/md";
 import { regionsName } from "./regions-name";
-import { useState, useEffect } from "react";
 
 export const SearchArea = ({
   setCountryNameTyped,

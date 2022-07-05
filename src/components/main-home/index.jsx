@@ -66,7 +66,7 @@ export const MainHome = () => {
       />
 
       <section>
-        {isLoading === true ? (
+        {isLoading ? (
           <Loader />
         ) : countryByName?.message ===
           "Internal Server Error: ClassCastException: attempting to castjar:file:/dev.amatos.restcountries.jar!/javax/ws/rs/ext/RuntimeDelegate.class to jar:file:/dev.amatos.restcountries.jar!/javax/ws/rs/ext/RuntimeDelegate.class" ? (
@@ -74,17 +74,17 @@ export const MainHome = () => {
         ) : (
           <Countries>
             {countriesToShow &&
-              countriesToShow.map((item, index) => {
+              countriesToShow.map((country, index) => {
                 return (
-                  <Link key={index} to={`/detail/${item.cca3}`}>
+                  <Link key={index} to={`/detail/${country.cca3}`}>
                     <Country>
-                      <Flag img={item.flags.png}></Flag>
+                      <Flag img={country.flags.png}></Flag>
                       <ContainerData>
-                        <Name>{item.name.common}</Name>
+                        <Name>{country.name.common}</Name>
                         <Data>
-                          <li>Population: {item.population}</li>
-                          <li>Region: {item.region}</li>
-                          <li>Capital: {item.capital}</li>
+                          <li>Population: {country.population}</li>
+                          <li>Region: {country.region}</li>
+                          <li>Capital: {country.capital}</li>
                         </Data>
                       </ContainerData>
                     </Country>

@@ -26,7 +26,6 @@ export const SearchByNameContainer = styled(BoxWithShadow)`
   justify-content: space-evenly;
   gap: 15px;
 
-
   input {
     background-color: transparent;
     border: none;
@@ -43,7 +42,6 @@ export const SearchByNameContainer = styled(BoxWithShadow)`
   @media (max-width: ${screenSizes.tablet}) {
     width: 100%;
   }
-
 `;
 
 export const SelectByRegionContainer = styled.div`

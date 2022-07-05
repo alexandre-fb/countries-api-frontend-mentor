@@ -1,5 +1,5 @@
 export const darkTheme = {
-  name: 'darkTheme',
+  name: "darkTheme",
   colors: {
     backgroundColor: "#202c37",
     primary: "#ffffff",
@@ -8,7 +8,7 @@ export const darkTheme = {
 };
 
 export const lightTheme = {
-  name: 'lightTheme',
+  name: "lightTheme",
   colors: {
     backgroundColor: "#fafafa",
     primary: "#111517",

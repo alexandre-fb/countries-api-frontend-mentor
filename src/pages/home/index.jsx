@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { ContainerPage } from "../../components/ContainerPages";
 import { Header } from "../../components/header";
 import { MainHome } from "../../components/main-home";

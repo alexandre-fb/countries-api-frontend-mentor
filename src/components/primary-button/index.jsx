@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BoxWithShadow } from "../box-with-shadow";
 
-export const PrimaryButton = styled(BoxWithShadow).attrs({ as: 'button'})`
+export const PrimaryButton = styled(BoxWithShadow).attrs({ as: "button" })`
   background: none;
   background-color: ${({ theme }) => theme.colors.secondary};
   border: none;
