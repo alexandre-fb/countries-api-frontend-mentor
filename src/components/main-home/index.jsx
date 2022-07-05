@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCountriesByRegion, getCountryByName } from "../../services";
 import {
-  Container,
+  StyledMain,
   Countries,
   Country,
   Flag,
@@ -53,7 +53,7 @@ export const MainHome = () => {
   }, [countryNameTyped]);
 
   return (
-    <Container>
+    <StyledMain>
       <SearchArea
         setCountryNameTyped={setCountryNameTyped}
         setIsLoading={setIsLoading}
@@ -94,6 +94,6 @@ export const MainHome = () => {
           </Countries>
         )}
       </section>
-    </Container>
+    </StyledMain>
   );
 };

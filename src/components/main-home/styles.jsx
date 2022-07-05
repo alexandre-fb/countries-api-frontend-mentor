@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { screenSizes } from "../../styles/screenSizes";
 
-export const Container = styled.main``;
+export const StyledMain = styled.main``;
 
 export const Countries = styled.ul`
   display: grid;
@@ -8,6 +9,19 @@ export const Countries = styled.ul`
   column-gap: 50px;
   row-gap: 70px;
   justify-content: space-between;
+
+  @media (max-width: ${screenSizes.smallDesktop}) {
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: ${screenSizes.tablet}) {
+    grid-template-columns: repeat(auto-fit, 200px);
+    column-gap: 20px;
+  }
+
+  @media (max-width: ${screenSizes.mobile}) {
+    grid-template-columns: 280px;
+  }
 `;
 
 export const Country = styled.li`
@@ -24,6 +38,14 @@ export const Flag = styled.div`
   background-position: center;
 
   border-radius: 5px 5px 0 0;
+
+  @media (max-width: ${screenSizes.tablet}) {
+    height: 140px;
+  }
+
+  @media (max-width: ${screenSizes.mobile}) {
+    height: 190px;
+  }
 `;
 
 export const ContainerData = styled.div`

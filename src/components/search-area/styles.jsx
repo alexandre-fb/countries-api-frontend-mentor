@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BoxWithShadow } from "../box-with-shadow";
+import { screenSizes } from "../../styles/screenSizes";
 
 export const Container = styled.section`
   height: 60px;
@@ -8,6 +9,12 @@ export const Container = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: start;
+
+  @media (max-width: ${screenSizes.tablet}) {
+    flex-direction: column;
+    gap: 20px;
+    height: 130px;
+  }
 `;
 
 export const SearchByNameContainer = styled(BoxWithShadow)`
@@ -18,6 +25,7 @@ export const SearchByNameContainer = styled(BoxWithShadow)`
   align-items: center;
   justify-content: space-evenly;
   gap: 15px;
+
 
   input {
     background-color: transparent;
@@ -31,6 +39,11 @@ export const SearchByNameContainer = styled(BoxWithShadow)`
       font-family: "Nunito Sans", sans-serif;
     }
   }
+
+  @media (max-width: ${screenSizes.tablet}) {
+    width: 100%;
+  }
+
 `;
 
 export const SelectByRegionContainer = styled.div`

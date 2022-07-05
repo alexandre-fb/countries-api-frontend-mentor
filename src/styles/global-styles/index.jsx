@@ -37,6 +37,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+
 }
 ol, ul {
 	list-style: none;
@@ -60,7 +61,7 @@ table {
 html {
     background-color: ${({ theme }) => theme.colors.backgroundColor};
     color: ${({ theme }) => theme.colors.primary};
-
+	overflow-x: hidden;
 }
 
 body {
