@@ -26,11 +26,11 @@ Esse projeto foi realizado com o objetivo de praticar e aprimorar habilidades de
 ### Desenvolvido com
 
 - HTML5 semântico
-- CSS
-- Flexbox
-- Grid
+- CSS (Flexbox e Grid)
+- JavaScript
 - ReactJS
 - Styled Components
+- React Router
 - Fetch API
 - Context API
 
