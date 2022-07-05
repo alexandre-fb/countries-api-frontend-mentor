@@ -39,7 +39,7 @@ export const SearchArea = ({
           placeholder="Search for a country..."
           value={countryNameTyped}
           onChange={(event) => {
-            setCountryNameTyped(event.target.value)
+            setCountryNameTyped(event.target.value);
           }}
         ></input>
       </SearchByNameContainer>
